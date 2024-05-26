@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href='/static/style.css' />
+<style>
+.button {
+  display: block;
+  border-radius: 4px;
+  background-color: #FF69B4;
+  border: 10px;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.button span {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -10px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 150px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+</style>
+</head>
+<body>
+
+<text>Ryzen 5</text>
+
+<button id="btn_start" class="button" style="vertical-align:middle"><span>ON/OFF</span></button>
+<button id="btn_reset" class="button" style="vertical-align:middle"><span>RESET</span></button>
+<text1  id="status" style="vertical-align:middle">Status: </text1>
+
+</body>
+
+<script>                                             
+document.getElementById("btn_start").addEventListener("click",(e) => {
+        fetch("/start").then(response => {
+		alert("Button Pressed!")
+	})
+})
+
+document.getElementById("btn_reset").addEventListener("click",(t) => {
+        fetch("/reset").then(response => {
+                alert("Reset!")
+        })
+})
+
+fetch("/state").then(response => response.json()).then(data => document.getElementById("status").innerHTML="Status: " + data)
+</script>
+
+</html>
